@@ -11,7 +11,8 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-@Setter@NoArgsConstructor
+@Setter
+@NoArgsConstructor
 public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
