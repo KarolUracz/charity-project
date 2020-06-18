@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" %>
 <header class="header--main-page">
     <nav class="container container--70">
         <ul class="nav--actions">

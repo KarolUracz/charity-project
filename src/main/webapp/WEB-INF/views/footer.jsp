@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" %>
 <footer>
     <div class="contact">
         <h2>Skontaktuj się z nami</h2>
