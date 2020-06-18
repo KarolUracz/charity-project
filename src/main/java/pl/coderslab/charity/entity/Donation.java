@@ -20,8 +20,8 @@ public class Donation {
     @Id
     private Long id;
     private Integer quantity;
-    @ManyToMany
-    private List<Category> categories;
+    @ManyToOne
+    private Category categories;
     @ManyToOne
     private Institution institution;
     private String street;

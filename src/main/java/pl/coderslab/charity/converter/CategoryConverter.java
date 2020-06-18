@@ -7,7 +7,7 @@ import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.repository.CategoryRepository;
 
 @Component
-public class categoryConverter implements Converter<String, Category> {
+public class CategoryConverter implements Converter<String, Category> {
 
     @Autowired
     private CategoryRepository categoryRepository;

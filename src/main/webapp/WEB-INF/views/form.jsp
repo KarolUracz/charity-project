@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
 <body>
+<script src="resources/js/app.js"></script>
 <header class="header--form-page">
     <nav class="container container--70">
         <ul class="nav--actions">
@@ -93,8 +94,10 @@
                     <div class="form-group form-group--checkbox">
                         <label>
                             <input
-                                    type="checkbox"
+                                    id="categoryId"
+                                    multiple=false
                                     name="categories"
+                                    type="checkbox"
                                     value="${category.id}"
                             />
                             <span class="checkbox"></span>
@@ -117,7 +120,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input type="number" name="bags" step="1" min="1" path="quantity"/>
+                        <form:input type="number" name="bags" step="1" min="1" path="quantity" id="quantity"/>
                     </label>
                 </div>
 
@@ -134,7 +137,7 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input type="radio" name="organization" value="${institution.id}"/>
+                            <input type="radio" name="organization" value="${institution.id}" id="institutionId"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                   <div class="title">${institution.name}</div>
@@ -160,16 +163,16 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <form:input type="text" name="address" path="street"/> </label>
+                            <label> Ulica <form:input type="text" name="address" path="street" id="street"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto <form:input type="text" name="city" path="city"/> </label>
+                            <label> Miasto <form:input type="text" name="city" path="city" id="city"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input type="text" name="postcode" path="zipCode"/>
+                                Kod pocztowy <form:input type="text" name="postcode" path="zipCode" id="zipCode"/>
                             </label>
                         </div>
 
@@ -183,17 +186,17 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <form:input type="date" name="data" path="pickUpDate"/> </label>
+                            <label> Data <form:input type="date" name="data" path="pickUpDate" id="pickUpDate"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <form:input type="time" name="time" path="pickUpTime"/> </label>
+                            <label> Godzina <form:input type="time" name="time" path="pickUpTime" id="pickUpTime"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <form:textarea name="more_info" rows="5" path="pickUpComment"></form:textarea>
+                                <form:textarea name="more_info" rows="5" path="pickUpComment" id="pickUpComment"/>
                             </label>
                         </div>
                     </div>
@@ -214,8 +217,8 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
+                                <span class="summary--text" id="summary"
+                                ></span
                                 >
                             </li>
 
@@ -232,9 +235,9 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
+                                <li id="streetInsert">Prosta 51</li>
+                                <li id="cityInsert">Warszawa</li>
+                                <li id="zipCodeInsert">99-098</li>
                                 <li>123 456 789</li>
                             </ul>
                         </div>
@@ -242,9 +245,9 @@
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li id="pickUpDateInsert">13/12/2018</li>
+                                <li id="pickUpTimeInsert">15:40</li>
+                                <li id="pickUpCommentInsert">Brak uwag</li>
                             </ul>
                         </div>
                     </div>

@@ -164,7 +164,15 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
-      document.querySelector()
+      let quantity = document.getElementById('quantity').value;
+      let categories = document.querySelectorAll('#categoryId').checked;
+      let pickUpDate = document.getElementById('pickUpDate').value;
+      let pickUpTime = document.getElementById('pickUptime').value;
+      let pickUpComment = document.getElementById('pickUpComment').value;
+      document.getElementById('pickUpDateInsert').innerText = pickUpDate;
+      document.getElementById('pickUpTimeInsert').innerText = pickUpTime;
+      document.getElementById('pickUpCommentInsert').innerText = pickUpComment;
+      document.getElementById('summary').innerText = quantity;
     }
 
   }
