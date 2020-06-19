@@ -4,11 +4,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.fixture.InitDataFixture;
+import pl.coderslab.charity.interfaces.UserService;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.model.CurrentUser;
@@ -20,12 +19,14 @@ public class HomeController {
     private InstitutionRepository institutionRepository;
     private DonationRepository donationRepository;
     private InitDataFixture initDataFixture;
+    private UserService userService;
 
 
-    public HomeController(InstitutionRepository institutionRepository, DonationRepository donationRepository, InitDataFixture initDataFixture) {
+    public HomeController(InstitutionRepository institutionRepository, DonationRepository donationRepository, InitDataFixture initDataFixture, UserService userService) {
         this.institutionRepository = institutionRepository;
         this.donationRepository = donationRepository;
         this.initDataFixture = initDataFixture;
+        this.userService = userService;
     }
 
 
@@ -59,5 +60,11 @@ public class HomeController {
     public String registration(Model model){
         model.addAttribute("user", new User());
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String userRegister(@ModelAttribute User user) {
+        userService.saveUser(user);
+        return "index";
     }
 }
