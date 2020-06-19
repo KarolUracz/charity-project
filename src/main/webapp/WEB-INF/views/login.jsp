@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="pl">
@@ -14,7 +15,7 @@
 
     <section class="login-page">
       <h2>Zaloguj się</h2>
-      <form method="post">
+      <form:form method="post">
         <div class="form-group">
           <input type="text" name="username" placeholder="Email" />
         </div>
@@ -28,7 +29,7 @@
           <button class="btn" type="submit" value="Sign In">Zaloguj się</button>
         </div>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      </form>
+      </form:form>
     </section>
 
   <%@include file="footer.jsp"%>

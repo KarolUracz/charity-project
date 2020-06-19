@@ -1,4 +1,4 @@
-package pl.coderslab.charity.service;
+package pl.coderslab.charity.interfaces;
 
 import pl.coderslab.charity.entity.User;
 

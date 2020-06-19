@@ -1,5 +1,7 @@
 package pl.coderslab.charity.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.charity.fixture.InitDataFixture;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.model.CurrentUser;
 
 
 @Controller
@@ -31,6 +34,16 @@ public class HomeController {
         model.addAttribute("bags", donationRepository.bagsSum().orElse(0));
         model.addAttribute("donations", donationRepository.findAll().size());
         return "index";
+    }
+
+    @GetMapping("/panel")
+    public String loginAction(@AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            return "redirect:/admin/panel";
+        } else if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))){
+            return "redirect:/user/panel";
+        }
+        return null;
     }
 
     @GetMapping("/initData")

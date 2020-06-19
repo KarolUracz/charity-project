@@ -4,21 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.entity.Role;
 import pl.coderslab.charity.entity.User;
+import pl.coderslab.charity.interfaces.UserService;
 import pl.coderslab.charity.repository.RoleRepository;
-import pl.coderslab.charity.repository.UserRepository;
+
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class InitDataFixture {
-    private final UserRepository userRepository;
+
     private final RoleRepository roleRepository;
+    private final UserService userService;
 
     @Autowired
-    public InitDataFixture(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
+    public InitDataFixture(RoleRepository roleRepository, UserService userService) {
         this.roleRepository = roleRepository;
+        this.userService = userService;
     }
 
     public void initRoles() {
@@ -34,22 +36,24 @@ public class InitDataFixture {
     public void initUsers() {
 
         Set<Role> adminRoles = new HashSet<>();
-        adminRoles.add(roleRepository.findByName("ROLE_ADMIN"));
+        adminRoles.add(roleRepository.findOneByName("ROLE_ADMIN"));
 
         User admin = new User();
         admin.setUsername("admin");
         admin.setPassword("admin");
+        admin.setEnabled(1);
         admin.setRoles(adminRoles);
-        userRepository.save(admin);
+        userService.saveUser(admin);
 
         Set<Role> userRoles = new HashSet<>();
-        userRoles.add(roleRepository.findByName("ROLE_USER"));
+        userRoles.add(roleRepository.findOneByName("ROLE_USER"));
 
         User user = new User();
         user.setUsername("user");
         user.setPassword("user");
+        user.setEnabled(1);
         user.setRoles(userRoles);
 
-        userRepository.save(user);
+        userService.saveUser(user);
     }
 }
