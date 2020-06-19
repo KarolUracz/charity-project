@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,16 +17,13 @@
                 ${admin.username}
                 <ul class="dropdown">
                     <li><a href="/admin/institutions">Zarządzaj fundacjami</a></li>
-                    <li><a href="#">Zarządzaj administratorami</a></li>
-                    <li><a href="#">Zarządzaj użytkownikami</a></li>
+                    <li><a href="/admin/manageAdmins">Zarządzaj administratorami</a></li>
+                    <li><a href="/admin/manageUsers">Zarządzaj użytkownikami</a></li>
                     <li>
-                        <nav>
                             <form action="<c:url value="/logout"/>" method="post">
                                 <input type="submit" value="Wyloguj">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </form>
-                        </nav
-                        >
                     </li>
                 </ul>
             </li>
@@ -42,18 +39,22 @@
     </nav>
 
     <div class="slogan container container--90">
-        <h2>
-            <div class="col">
-                <div class="title"><a href="/admin/institutions">Zarządzaj fundacjami</a></div>
-            </div>
-            <div class="col">
-                <div class="title"><a href="/admin/manageAdmins">Zarządzaj administratorami</a></div>
-            </div>
-            <div class="col">
-                <div class="title"><a href="/admin/manageUsers">Zarządzaj użytkownikami</a></div>
-            </div>
-        </h2>
+        <ul class="summary">
+            <c:forEach items="${institutions}" var="institution">
+                <li>
+                    <div class="col">
+                        <div class="title">${institution.name}</div>
+                        <div class="subtitle">${institution.description}</div>
+                        <div><a href="/admin/instUpdate">Edytuj</a> <a href="/admin/instDelete">Usuń</a></div>
+                    </div>
+                </li>
+            </c:forEach>
+            <li>
+                <div class="btn"><a href="/admin/instAdd">Dodaj fundację</a></div>
+            </li>
+        </ul>
     </div>
 </header>
+<script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>

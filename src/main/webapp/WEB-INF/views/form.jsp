@@ -95,7 +95,6 @@
                         <label>
                             <input
                                     id="categoryId"
-                                    multiple=false
                                     name="categories"
                                     type="checkbox"
                                     value="${category.id}"
@@ -142,7 +141,7 @@
                             <span class="description">
                   <div class="title" id="institutionName">${institution.name}</div>
                   <div class="subtitle">
-                    ${institution.description}
+                          ${institution.description}
                   </div>
                 </span>
                         </label>
@@ -176,21 +175,23 @@
                             </label>
                         </div>
 
-<%--                        <div class="form-group form-group--inline">--%>
-<%--                            <label>--%>
-<%--                                Numer telefonu <form:input type="phone" name="phone" path="phone"/>--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
+                            <%--                        <div class="form-group form-group--inline">--%>
+                            <%--                            <label>--%>
+                            <%--                                Numer telefonu <form:input type="phone" name="phone" path="phone"/>--%>
+                            <%--                            </label>--%>
+                            <%--                        </div>--%>
                     </div>
 
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <form:input type="date" name="data" path="pickUpDate" id="pickUpDate"/> </label>
+                            <label> Data <form:input type="date" name="data" path="pickUpDate"
+                                                     id="pickUpDate"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <form:input type="time" name="time" path="pickUpTime" id="pickUpTime"/> </label>
+                            <label> Godzina <form:input type="time" name="time" path="pickUpTime"
+                                                        id="pickUpTime"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">

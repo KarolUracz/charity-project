@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
       let city = document.getElementById('city').value;
       let zipCode = document.getElementById('zipCode').value;
       let pickUpDate = document.getElementById('pickUpDate').value;
-      let pickUpTime = document.getElementById('pickUptime').value;
+      let pickUpTime = document.getElementById('pickUpTime').value;
       let pickUpComment = document.getElementById('pickUpComment').value;
       // let categories = document.querySelectorAll('categoryId').checked.value;
 
