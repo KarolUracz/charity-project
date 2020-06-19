@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.fixture.InitDataFixture;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
@@ -52,5 +53,11 @@ public class HomeController {
         this.initDataFixture.initRoles();
         this.initDataFixture.initUsers();
         return "initialized";
+    }
+
+    @GetMapping("/register")
+    public String registration(Model model){
+        model.addAttribute("user", new User());
+        return "register";
     }
 }

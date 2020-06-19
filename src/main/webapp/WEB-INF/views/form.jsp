@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8"/>
@@ -101,7 +101,7 @@
                                     value="${category.id}"
                             />
                             <span class="checkbox"></span>
-                            <span class="description"
+                            <span class="description" id="categoryName"
                             >${category.name}</span
                             >
                         </label>
@@ -137,10 +137,10 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input type="radio" name="organization" value="${institution.id}" id="institutionId"/>
+                            <input type="radio" name="institution" value="${institution.id}" id="institutionId"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
-                  <div class="title">${institution.name}</div>
+                  <div class="title" id="institutionName">${institution.name}</div>
                   <div class="subtitle">
                     ${institution.description}
                   </div>
@@ -224,8 +224,8 @@
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
+                                <span class="summary--text" id="institutionData"
+                                ></span
                                 >
                             </li>
                         </ul>
@@ -235,9 +235,9 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li id="streetInsert">Prosta 51</li>
-                                <li id="cityInsert">Warszawa</li>
-                                <li id="zipCodeInsert">99-098</li>
+                                <li id="streetInsert"></li>
+                                <li id="cityInsert"></li>
+                                <li id="zipCodeInsert"></li>
                                 <li>123 456 789</li>
                             </ul>
                         </div>
@@ -245,9 +245,9 @@
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li id="pickUpDateInsert">13/12/2018</li>
-                                <li id="pickUpTimeInsert">15:40</li>
-                                <li id="pickUpCommentInsert">Brak uwag</li>
+                                <li id="pickUpDateInsert"></li>
+                                <li id="pickUpTimeInsert"></li>
+                                <li id="pickUpCommentInsert"></li>
                             </ul>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
 </section>
 
 <%@include file="footer.jsp" %>
->
+
 
 <script src="<c:url value="/resources/js/app.js"/>"></script>
 </body>

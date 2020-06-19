@@ -3,13 +3,12 @@ package pl.coderslab.charity.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.mapping.ToOne;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,8 +19,8 @@ public class Donation {
     @Id
     private Long id;
     private Integer quantity;
-    @ManyToOne
-    private Category categories;
+    @ManyToMany
+    private Set<Category> categories;
     @ManyToOne
     private Institution institution;
     private String street;

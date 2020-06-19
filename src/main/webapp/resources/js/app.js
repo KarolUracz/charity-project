@@ -165,14 +165,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // TODO: get data from inputs and show them in summary
       let quantity = document.getElementById('quantity').value;
-      let categories = document.querySelectorAll('#categoryId').checked;
+      let institutionName = document.getElementById('institutionName').value;
+      let street = document.getElementById('street').value;
+      let city = document.getElementById('city').value;
+      let zipCode = document.getElementById('zipCode').value;
       let pickUpDate = document.getElementById('pickUpDate').value;
       let pickUpTime = document.getElementById('pickUptime').value;
       let pickUpComment = document.getElementById('pickUpComment').value;
+      // let categories = document.querySelectorAll('categoryId').checked.value;
+
+
+
+      document.getElementById('summary').innerText = quantity;
+      document.getElementById('institutionData').innerText = institutionName;
+      document.getElementById('streetInsert').innerText = street;
+      document.getElementById('cityInsert').innerText = city;
+      document.getElementById('zipCodeInsert').innerText = zipCode;
       document.getElementById('pickUpDateInsert').innerText = pickUpDate;
       document.getElementById('pickUpTimeInsert').innerText = pickUpTime;
-      document.getElementById('pickUpCommentInsert').innerText = pickUpComment;
-      document.getElementById('summary').innerText = quantity;
+      document.getElementById('pickUpCommentInsert').innerText = pickUpComment
+      // document.getElementById('summary').innerText = categories;
+
+
+
+
+
     }
 
   }
