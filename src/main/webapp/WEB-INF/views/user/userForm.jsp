@@ -1,15 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="pl">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Panel Użytkownika</title>
+    <title>Document</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
+<script src="<c:url value="/resources/js/app.js"/>"></script>
 <header class="header--form-page">
     <nav class="container container--70">
         <ul class="nav--actions">
@@ -19,13 +21,10 @@
                     <li><a href="/user/editProfile/${user.id}">Edycja konta</a></li>
                     <li><a href="/user/passwordChange/${user.id}">Zmień hasło</a></li>
                     <li>
-                        <nav>
-                            <form action="<c:url value="/logout"/>" method="post">
-                                <input type="submit" value="Wyloguj">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            </form>
-                        </nav
-                        >
+                        <form action="<c:url value="/logout"/>" method="post">
+                            <input type="submit" value="Wyloguj">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -38,18 +37,29 @@
             <li><a href="index.html#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
+        <section>
+            <h2>Dodaj dane instytucji:</h2>
+            <form:form action="/user/editProfile" method="post" modelAttribute="user">
+                <form:hidden path="id"/>
+                <div class="form-group form-group--inline">
+                    <label>
+                        Wpisz nową nazwę użytkownika: <form:input path="username"/>
+                    </label>
+                </div>
+                <div class="form-group form-group--buttons">
+                    <button type="submit" class="btn">Potwierdzam</button>
+                    <div class="btn"><a href="/user/panel">Wstecz</a></div>
+                </div>
+            </form:form>
+        </section>
     </nav>
-
-    <div class="slogan container container--90">
-        <h2>
-            <div class="col">
-                <div class="title"><a href="/user/editProfile/${user.id}">Edycja konta</a></div>
-            </div>
-            <div class="col">
-                <div class="title"><a href="/user/passwordChange/${user.id}">Zmień hasło</a></div>
-            </div>
-        </h2>
-    </div>
 </header>
+
+
+
+<%@include file="/WEB-INF/views/footer.jsp" %>
+
+
+<script src="<c:url value="/resources/js/app.js"/>"></script>
 </body>
 </html>

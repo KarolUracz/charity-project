@@ -13,4 +13,6 @@ public interface UserService {
     List<User> findAllAdministrators();
     List<User> findAllUsers();
     void save(User user);
+    void editUser(User user);
+    void changePassword(User user);
 }
