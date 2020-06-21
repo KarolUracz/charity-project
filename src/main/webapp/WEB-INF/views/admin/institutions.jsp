@@ -20,10 +20,10 @@
                     <li><a href="/admin/manageAdmins">Zarządzaj administratorami</a></li>
                     <li><a href="/admin/manageUsers">Zarządzaj użytkownikami</a></li>
                     <li>
-                            <form action="<c:url value="/logout"/>" method="post">
-                                <input type="submit" value="Wyloguj">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            </form>
+                        <form action="<c:url value="/logout"/>" method="post">
+                            <input type="submit" value="Wyloguj">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -39,20 +39,22 @@
     </nav>
 
     <div class="slogan container container--90">
-        <ul class="summary">
+        <ul class="help--slides-items">
             <c:forEach items="${institutions}" var="institution">
-                <li>
-                    <div class="col">
-                        <div class="title">${institution.name}</div>
-                        <div class="subtitle">${institution.description}</div>
-                        <div><a href="/admin/instUpdate">Edytuj</a> <a href="/admin/instDelete">Usuń</a></div>
-                    </div>
-                </li>
+            <li>
+                <div class="col">
+                    <div class="title">${institution.name}</div>
+                    <div class="subtitle">${institution.description}</div>
+                    <div>
+                        <a href="/admin/instUpdate/${institution.id}">Edytuj</a>
+                        <a href="/admin/instDelete/${institution.id}">Usuń</a></div>
+                </div>
+            </li>
             </c:forEach>
             <li>
                 <div class="btn"><a href="/admin/instAdd">Dodaj fundację</a></div>
+                <div class="btn"><a href="/admin/panel">Wstecz</a></div>
             </li>
-        </ul>
     </div>
 </header>
 <script src="<c:url value="resources/js/app.js"/>"></script>
