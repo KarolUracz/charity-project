@@ -11,5 +11,6 @@ public interface UserService {
     void deleteUser(Long id);
     void saveAdmin(User user);
     List<User> findAllAdministrators();
+    List<User> findAllUsers();
     void save(User user);
 }

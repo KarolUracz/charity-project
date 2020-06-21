@@ -1,17 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="pl">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
+    <title>Administrator panel</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<script src="<c:url value="/resources/js/app.js"/>"></script>
 <header class="header--form-page">
     <nav class="container container--70">
         <ul class="nav--actions">
@@ -20,7 +18,7 @@
                 <ul class="dropdown">
                     <li><a href="/admin/institutions">Zarządzaj fundacjami</a></li>
                     <li><a href="/admin/administrators">Zarządzaj administratorami</a></li>
-                    <li><a href="/admin/manageUsers">Zarządzaj użytkownikami</a></li>
+                    <li><a href="/admin/users">Zarządzaj użytkownikami</a></li>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">
                             <input type="submit" value="Wyloguj">
@@ -38,35 +36,34 @@
             <li><a href="index.html#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
-        <section>
-            <h2>Dodaj dane instytucji:</h2>
-            <form:form action="/admin/instUpdate" method="post" modelAttribute="institutionToUpdate">
-                <form:hidden path="id"/>
-                <div class="form-group form-group--inline">
-                    <label>
-                        Wpisz nazwę fundacji: <form:input path="name"/>
-                    </label>
-                </div>
-                <div class="form-group form-group--inline">
-                    <label>
-                        Wpisz opis fundacji: <form:textarea path="description"/>
-                    </label>
-                </div>
-                <div class="form-group form-group--buttons">
-                    <button type="submit" class="btn">Potwierdzam</button>
-                    <a href="/admin/institutions">
-                        <button type="button" class="btn">Wstecz</button>
-                    </a>
-                </div>
-            </form:form>
-        </section>
     </nav>
+
+    <div class="slogan container container--90">
+        <ul class="help--slides-items">
+            <c:forEach items="${users}" var="user">
+            <li>
+                <div class="col">
+                    <div class="title">Użytkownik: ${user.username}</div>
+                    <div class="subtitle">Status: ${user.enabled}</div>
+                    <div>
+                        <a href="/admin/userUpdate/${user.id}">Edytuj</a>
+                        <c:if test="${user.enabled == 1}">
+                            <a href="/admin/deactivateUser/${user.id}">Zablokuj</a>
+                        </c:if>
+                        <c:if test="${user.enabled == 0}">
+                            <a href="/admin/activateUser/${user.id}">Aktywuj</a>
+                        </c:if>
+                        <a href="/admin/deleteUser/${user.id}">Usuń</a>
+                    </div>
+                </div>
+            </li>
+            </c:forEach>
+            <li>
+                <div class="btn"><a href="/admin/userAdd">Dodaj użytkownika</a></div>
+                <div class="btn"><a href="/admin/panel">Wstecz</a></div>
+            </li>
+    </div>
 </header>
-
-
-<%@include file="/WEB-INF/views/footer.jsp" %>
-
-
-<script src="<c:url value="/resources/js/app.js"/>"></script>
+<script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>

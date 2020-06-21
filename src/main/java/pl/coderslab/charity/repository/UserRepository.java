@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
-    @Query("SELECT u FROM User u inner join u.roles r WHERE r.id=1")
-    List<User> findAllByRole();
+    @Query("SELECT u FROM User u inner join u.roles r WHERE r.name='ROLE_ADMIN'")
+    List<User> findAllByRoleAdmin();
+    @Query("SELECT u FROM User u inner join u.roles r WHERE r.name='ROLE_USER'")
+    List<User> findAllByRoleUser();
 }

@@ -18,7 +18,7 @@
                 <ul class="dropdown">
                     <li><a href="/admin/institutions">Zarządzaj fundacjami</a></li>
                     <li><a href="/admin/administrators">Zarządzaj administratorami</a></li>
-                    <li><a href="#">Zarządzaj użytkownikami</a></li>
+                    <li><a href="/admin/users">Zarządzaj użytkownikami</a></li>
                     <li>
                         <nav>
                             <form action="<c:url value="/logout"/>" method="post">

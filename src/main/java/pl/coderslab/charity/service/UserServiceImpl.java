@@ -59,7 +59,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllAdministrators() {
-        return userRepository.findAllByRole();
+        return userRepository.findAllByRoleAdmin();
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAllByRoleUser();
     }
 
     @Override

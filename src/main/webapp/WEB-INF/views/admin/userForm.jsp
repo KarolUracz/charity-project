@@ -20,7 +20,7 @@
                 <ul class="dropdown">
                     <li><a href="/admin/institutions">Zarządzaj fundacjami</a></li>
                     <li><a href="/admin/administrators">Zarządzaj administratorami</a></li>
-                    <li><a href="/admin/manageUsers">Zarządzaj użytkownikami</a></li>
+                    <li><a href="/admin/users">Zarządzaj użytkownikami</a></li>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">
                             <input type="submit" value="Wyloguj">
@@ -40,28 +40,26 @@
         </ul>
         <section>
             <h2>Dodaj dane instytucji:</h2>
-            <form:form action="/admin/instUpdate" method="post" modelAttribute="institutionToUpdate">
+            <form:form action="/admin/userAdd" method="post" modelAttribute="user">
                 <form:hidden path="id"/>
                 <div class="form-group form-group--inline">
                     <label>
-                        Wpisz nazwę fundacji: <form:input path="name"/>
+                        Wpisz nazwę użytkownika: <form:input path="username"/>
                     </label>
                 </div>
                 <div class="form-group form-group--inline">
                     <label>
-                        Wpisz opis fundacji: <form:textarea path="description"/>
+                        Wpisz hasło użytkownika: <form:input path="password"/>
                     </label>
                 </div>
                 <div class="form-group form-group--buttons">
                     <button type="submit" class="btn">Potwierdzam</button>
-                    <a href="/admin/institutions">
-                        <button type="button" class="btn">Wstecz</button>
-                    </a>
                 </div>
             </form:form>
         </section>
     </nav>
 </header>
+
 
 
 <%@include file="/WEB-INF/views/footer.jsp" %>
