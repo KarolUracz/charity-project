@@ -18,9 +18,9 @@
             <li class="logged-user">
                 ${admin.username}
                 <ul class="dropdown">
-                    <li><a href="<c:url value="/admin/institutions"/>">Zarządzaj fundacjami</a></li>
-<%--                    <li><a href="<c:url value="/admin/manageAdmins"/>">Zarządzaj administratorami</a></li>--%>
-<%--                    <li><a href="<c:url value="/admin/manageUsers"/>">Zarządzaj użytkownikami</a></li>--%>
+                    <li><a href="/admin/institutions">Zarządzaj fundacjami</a></li>
+                    <li><a href="/admin/administrators">Zarządzaj administratorami</a></li>
+                    <li><a href="/admin/users">Zarządzaj użytkownikami</a></li>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">
                             <input type="submit" value="Wyloguj">
