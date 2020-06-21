@@ -1,15 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="pl">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Administrator panel</title>
+    <title>Document</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
+<script src="<c:url value="/resources/js/app.js"/>"></script>
 <header class="header--form-page">
     <nav class="container container--70">
         <ul class="nav--actions">
@@ -36,27 +38,34 @@
             <li><a href="index.html#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
-    </nav>
-
-    <div class="slogan container container--90">
-        <ul class="help--slides-items">
-            <c:forEach items="${administrators}" var="user">
-            <li>
-                <div class="col">
-                    <div class="title">Administrator: ${user.username}</div>
-                    <div class="subtitle">Status: ${user.enabled}</div>
-                    <div>
-                        <a href="/admin/adminUpdate/${user.id}">Edytuj</a>
-                        <a href="/admin/adminDelete/${user.id}">Usuń</a></div>
+        <section>
+            <h2>Dodaj dane instytucji:</h2>
+            <form:form action="/admin/userUpdate" method="post" modelAttribute="user">
+                <form:hidden path="id"/>
+                <div class="form-group form-group--inline">
+                    <label>
+                        Wpisz nową nazwę użytkownika: <form:input path="username"/>
+                    </label>
                 </div>
-            </li>
-            </c:forEach>
-            <li>
-                <div class="btn"><a href="/admin/adminAdd">Dodaj administratora</a></div>
-                <div class="btn"><a href="/admin/panel">Wstecz</a></div>
-            </li>
-    </div>
+                <div class="form-group form-group--inline">
+                    <label>
+                        Wpisz status (0 - nieaktywny, 1 -aktywny): <form:input path="enabled"/>
+                    </label>
+                </div>
+                <div class="form-group form-group--buttons">
+                    <button type="submit" class="btn">Potwierdzam</button>
+                    <div class="btn"><a href="/admin/administrators">Wstecz</a></div>
+                </div>
+            </form:form>
+        </section>
+    </nav>
 </header>
-<script src="<c:url value="resources/js/app.js"/>"></script>
+
+
+
+<%@include file="/WEB-INF/views/footer.jsp" %>
+
+
+<script src="<c:url value="/resources/js/app.js"/>"></script>
 </body>
 </html>

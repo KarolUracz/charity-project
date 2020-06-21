@@ -40,19 +40,26 @@
 
     <div class="slogan container container--90">
         <ul class="help--slides-items">
-            <c:forEach items="${administrators}" var="user">
+            <c:forEach items="${users}" var="user">
             <li>
                 <div class="col">
-                    <div class="title">Administrator: ${user.username}</div>
+                    <div class="title">Użytkownik: ${user.username}</div>
                     <div class="subtitle">Status: ${user.enabled}</div>
                     <div>
-                        <a href="/admin/adminUpdate/${user.id}">Edytuj</a>
-                        <a href="/admin/adminDelete/${user.id}">Usuń</a></div>
+                        <a href="/admin/userUpdate/${user.id}">Edytuj</a>
+                        <c:if test="${user.enabled == 1}">
+                            <a href="/admin/deactivateUser/${user.id}">Zablokuj</a>
+                        </c:if>
+                        <c:if test="${user.enabled == 0}">
+                            <a href="/admin/activateUser/${user.id}">Aktywuj</a>
+                        </c:if>
+                        <a href="/admin/deleteUser/${user.id}">Usuń</a>
+                    </div>
                 </div>
             </li>
             </c:forEach>
             <li>
-                <div class="btn"><a href="/admin/adminAdd">Dodaj administratora</a></div>
+                <div class="btn"><a href="/admin/userAdd">Dodaj użytkownika</a></div>
                 <div class="btn"><a href="/admin/panel">Wstecz</a></div>
             </li>
     </div>

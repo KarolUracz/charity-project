@@ -1,6 +1,7 @@
 package pl.coderslab.charity.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -79,8 +80,7 @@ public class AdminController {
     }
 
     @ModelAttribute("administrators")
-    public List<User> getAdministrators(@AuthenticationPrincipal CurrentUser currentUser, Model model){
-        model.addAttribute("admin", currentUser.getUser());
+    public List<User> administrators(Model model){
         return userService.findAllAdministrators();
     }
 
@@ -113,5 +113,57 @@ public class AdminController {
     public String deleteAdmin(@PathVariable Long id){
         userService.deleteUser(id);
         return "redirect:/admin/administrators";
+    }
+
+    @GetMapping("/users")
+    public String getUserList(Model model){
+        model.addAttribute("users", userService.findAllUsers());
+        return "/admin/users";
+    }
+
+    @GetMapping("/userAdd")
+    public String addUser(Model model){
+        model.addAttribute("user", new User());
+        return "/admin/userForm";
+    }
+
+    @PostMapping("/userAdd")
+    public String userAdd(@ModelAttribute User user){
+        userService.saveUser(user);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/userUpdate/{id}")
+    public String userUpdate(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+        return "/admin/editUser";
+    }
+
+    @PostMapping("/userUpdate")
+    public String userUpdate(@ModelAttribute User user){
+        userService.save(user);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/deactivateUser/{id}")
+    public String deactivateUser (@PathVariable Long id) {
+        User userById = userService.findById(id);
+        userById.setEnabled(0);
+        userService.save(userById);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/activateUser/{id}")
+    public String activateUser (@PathVariable Long id){
+        User userById = userService.findById(id);
+        userById.setEnabled(1);
+        userService.save(userById);
+        return "redirect:/admin/users";
     }
 }

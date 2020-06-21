@@ -40,14 +40,14 @@
 
     <div class="slogan container container--90">
         <ul class="help--slides-items">
-            <c:forEach items="${institutions}" var="administrator">
+            <c:forEach items="${institutions}" var="user">
             <li>
                 <div class="col">
-                    <div class="title">${administrator.name}</div>
-                    <div class="subtitle">${administrator.description}</div>
+                    <div class="title">${user.name}</div>
+                    <div class="subtitle">${user.description}</div>
                     <div>
-                        <a href="/admin/instUpdate/${administrator.id}">Edytuj</a>
-                        <a href="/admin/instDelete/${administrator.id}">Usuń</a></div>
+                        <a href="/admin/instUpdate/${user.id}">Edytuj</a>
+                        <a href="/admin/instDelete/${user.id}">Usuń</a></div>
                 </div>
             </li>
             </c:forEach>
