@@ -74,4 +74,23 @@ public class UserServiceImpl implements UserService {
         user.setRoles(userFromDB.getRoles());
         userRepository.save(user);
     }
+
+    @Override
+    public void editUser(User user) {
+        User fromDb = userRepository.getOne(user.getId());
+        user.setEnabled(fromDb.getEnabled());
+        user.setRoles(fromDb.getRoles());
+        user.setPassword(fromDb.getPassword());
+        userRepository.save(user);
+    }
+
+    @Override
+    public void changePassword(User user) {
+        User fromDb = userRepository.getOne(user.getId());
+        user.setRoles(fromDb.getRoles());
+        user.setEnabled(fromDb.getEnabled());
+        user.setUsername(fromDb.getUsername());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
 }
