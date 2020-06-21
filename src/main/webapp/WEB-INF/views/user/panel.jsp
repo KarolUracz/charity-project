@@ -16,16 +16,14 @@
             <li class="logged-user">
                 ${user.username}
                 <ul class="dropdown">
-                    <li><a href="/user/editProfile/${user.id}">Edycja konta</a></li>
+                    <li><a href="/user/editProfile/${user.id}">Profil</a></li>
+                    <li><a href="#">Moje zbiórki</a></li>
                     <li><a href="/user/passwordChange/${user.id}">Zmień hasło</a></li>
                     <li>
-                        <nav>
-                            <form action="<c:url value="/logout"/>" method="post">
-                                <input type="submit" value="Wyloguj">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            </form>
-                        </nav
-                        >
+                        <form action="<c:url value="/logout"/>" method="post">
+                            <input type="submit" value="Wyloguj">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -41,15 +39,36 @@
     </nav>
 
     <div class="slogan container container--90">
-        <h2>
-            <div class="col">
-                <div class="title"><a href="/user/editProfile/${user.id}">Edycja konta</a></div>
+        <div class="slogan--item">
+            <h1>
+                Oddaj rzeczy, których już nie chcesz<br/>
+                <span class="uppercase">potrzebującym</span>
+            </h1>
+
+            <div class="slogan--steps">
+                <div class="slogan--steps-title">Wystarczą 4 proste kroki:</div>
+                <ul class="slogan--steps-boxes">
+                    <li>
+                        <div><em>1</em><span>Wybierz rzeczy</span></div>
+                    </li>
+                    <li>
+                        <div><em>2</em><span>Spakuj je w worki</span></div>
+                    </li>
+                    <li>
+                        <div><em>3</em><span>Wybierz fundację</span></div>
+                    </li>
+                    <li>
+                        <div><em>4</em><span>Zamów kuriera</span></div>
+                    </li>
+                </ul>
+                <br>
+                <br>
+                <br>
+                <div class="btn"><a href="/user/donation">Formularz</a></div>
             </div>
-            <div class="col">
-                <div class="title"><a href="/user/passwordChange/${user.id}">Zmień hasło</a></div>
-            </div>
-        </h2>
+        </div>
     </div>
 </header>
+<%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
 </html>

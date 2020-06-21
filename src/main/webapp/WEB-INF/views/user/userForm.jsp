@@ -20,6 +20,7 @@
                 <ul class="dropdown">
                     <li><a href="/user/editProfile/${user.id}">Edycja konta</a></li>
                     <li><a href="/user/passwordChange/${user.id}">Zmień hasło</a></li>
+                    <li><a href="#">Moje zbiórki</a></li>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">
                             <input type="submit" value="Wyloguj">
@@ -38,7 +39,7 @@
             <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
         <section>
-            <h2>Dodaj dane instytucji:</h2>
+            <h2>Podaj nowe dane:</h2>
             <form:form action="/user/editProfile" method="post" modelAttribute="user">
                 <form:hidden path="id"/>
                 <div class="form-group form-group--inline">

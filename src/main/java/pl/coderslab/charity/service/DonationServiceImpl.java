@@ -1,5 +1,6 @@
 package pl.coderslab.charity.service;
 
+import org.springframework.stereotype.Service;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.interfaces.DonationService;
 import pl.coderslab.charity.repository.DonationRepository;
@@ -7,6 +8,7 @@ import pl.coderslab.charity.repository.DonationRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class DonationServiceImpl implements DonationService {
 
     private DonationRepository donationRepository;
@@ -23,5 +25,10 @@ public class DonationServiceImpl implements DonationService {
     @Override
     public Optional<Integer> bagsSum() {
         return donationRepository.bagsSum();
+    }
+
+    @Override
+    public void save(Donation donation) {
+        donationRepository.save(donation);
     }
 }

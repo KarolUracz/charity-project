@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface DonationService {
     List<Donation> findAll();
     Optional<Integer> bagsSum();
+    void save(Donation donation);
 }

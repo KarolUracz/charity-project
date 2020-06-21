@@ -8,19 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Document</title>
-    <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<script src="resources/js/app.js"></script>
+<script src="/resources/js/app.js"></script>
 <header class="header--form-page">
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
-                Witaj Agata
+                ${user.username}
                 <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="/user/editProfile">Profil</a></li>
+                    <li><a href="/user/passwordChange/${user.id}">Zmień hasło</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
+                    <li>
+                        <form action="<c:url value="/logout"/>" method="post">
+                            <input type="submit" value="Wyloguj">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -85,7 +91,8 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form action="/form" method="post" modelAttribute="donation">
+        <form:form action="/donation/form" method="post" modelAttribute="donation">
+
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
@@ -253,17 +260,18 @@
                         </div>
                     </div>
                 </div>
-
+                <input type="hidden" value="${user}">
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
                     <button type="submit" class="btn">Potwierdzam</button>
                 </div>
             </div>
+            <%--            <input type="text" value="${user.id}">--%>
         </form:form>
     </div>
 </section>
 
-<%@include file="footer.jsp" %>
+<%@include file="../footer.jsp" %>
 
 
 <script src="<c:url value="/resources/js/app.js"/>"></script>
