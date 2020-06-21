@@ -19,8 +19,8 @@
                 ${admin.username}
                 <ul class="dropdown">
                     <li><a href="<c:url value="/admin/institutions"/>">Zarządzaj fundacjami</a></li>
-                    <%--                    <li><a href="<c:url value="/admin/manageAdmins"/>">Zarządzaj administratorami</a></li>--%>
-                    <%--                    <li><a href="<c:url value="/admin/manageUsers"/>">Zarządzaj użytkownikami</a></li>--%>
+                    <li><a href="<c:url value="/admin/administrators"/>">Zarządzaj administratorami</a></li>
+<%--                    <li><a href="<c:url value="/admin/manageUsers"/>">Zarządzaj użytkownikami</a></li>--%>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">
                             <input type="submit" value="Wyloguj">
@@ -54,13 +54,14 @@
                 </div>
                 <div class="form-group form-group--buttons">
                     <button type="submit" class="btn">Potwierdzam</button>
-                    <a href="/admin/institutions"><button type="button" class="btn">Wstecz</button></a>
+                    <a href="/admin/institutions">
+                        <button type="button" class="btn">Wstecz</button>
+                    </a>
                 </div>
             </form:form>
         </section>
     </nav>
 </header>
-
 
 
 <%@include file="/WEB-INF/views/footer.jsp" %>

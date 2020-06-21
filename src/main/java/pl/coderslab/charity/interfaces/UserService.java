@@ -2,7 +2,14 @@ package pl.coderslab.charity.interfaces;
 
 import pl.coderslab.charity.entity.User;
 
+import java.util.List;
+
 public interface UserService {
     User findByUserName (String name);
     void saveUser(User user);
+    User findById(Long id);
+    void deleteUser(Long id);
+    void saveAdmin(User user);
+    List<User> findAllAdministrators();
+    void save(User user);
 }

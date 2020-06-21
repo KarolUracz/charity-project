@@ -17,8 +17,8 @@
                 ${admin.username}
                 <ul class="dropdown">
                     <li><a href="/admin/institutions">Zarządzaj fundacjami</a></li>
-                    <li><a href="/admin/manageAdmins">Zarządzaj administratorami</a></li>
-                    <li><a href="/admin/manageUsers">Zarządzaj użytkownikami</a></li>
+                    <li><a href="/admin/administrators">Zarządzaj administratorami</a></li>
+                    <li><a href="/admin/users">Zarządzaj użytkownikami</a></li>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">
                             <input type="submit" value="Wyloguj">
@@ -40,14 +40,14 @@
 
     <div class="slogan container container--90">
         <ul class="help--slides-items">
-            <c:forEach items="${institutions}" var="institution">
+            <c:forEach items="${institutions}" var="administrator">
             <li>
                 <div class="col">
-                    <div class="title">${institution.name}</div>
-                    <div class="subtitle">${institution.description}</div>
+                    <div class="title">${administrator.name}</div>
+                    <div class="subtitle">${administrator.description}</div>
                     <div>
-                        <a href="/admin/instUpdate/${institution.id}">Edytuj</a>
-                        <a href="/admin/instDelete/${institution.id}">Usuń</a></div>
+                        <a href="/admin/instUpdate/${administrator.id}">Edytuj</a>
+                        <a href="/admin/instDelete/${administrator.id}">Usuń</a></div>
                 </div>
             </li>
             </c:forEach>

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,15 +18,12 @@
                 <ul class="dropdown">
                     <li><a href="/admin/institutions">Zarządzaj fundacjami</a></li>
                     <li><a href="/admin/administrators">Zarządzaj administratorami</a></li>
-                    <li><a href="#">Zarządzaj użytkownikami</a></li>
+                    <li><a href="/admin/users">Zarządzaj użytkownikami</a></li>
                     <li>
-                        <nav>
-                            <form action="<c:url value="/logout"/>" method="post">
-                                <input type="submit" value="Wyloguj">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            </form>
-                        </nav
-                        >
+                        <form action="<c:url value="/logout"/>" method="post">
+                            <input type="submit" value="Wyloguj">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -42,18 +39,24 @@
     </nav>
 
     <div class="slogan container container--90">
-        <h2>
-            <div class="col">
-                <div class="title"><a href="/admin/institutions">Zarządzaj fundacjami</a></div>
-            </div>
-            <div class="col">
-                <div class="title"><a href="/admin/administrators">Zarządzaj administratorami</a></div>
-            </div>
-            <div class="col">
-                <div class="title"><a href="/admin/users">Zarządzaj użytkownikami</a></div>
-            </div>
-        </h2>
+        <ul class="help--slides-items">
+            <c:forEach items="${administrators}" var="administrator">
+            <li>
+                <div class="col">
+                    <div class="title">${administrator.username}</div>
+                    <div class="subtitle">${administrator.enabled}</div>
+                    <div>
+                        <a href="/admin/adminUpdate/${administrator.id}">Edytuj</a>
+                        <a href="/admin/adminDelete/${administrator.id}">Usuń</a></div>
+                </div>
+            </li>
+            </c:forEach>
+            <li>
+                <div class="btn"><a href="/admin/adminAdd">Dodaj administratora</a></div>
+                <div class="btn"><a href="/admin/panel">Wstecz</a></div>
+            </li>
     </div>
 </header>
+<script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
