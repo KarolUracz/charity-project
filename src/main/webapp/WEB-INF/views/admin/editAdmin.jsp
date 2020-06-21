@@ -19,8 +19,8 @@
                 ${admin.username}
                 <ul class="dropdown">
                     <li><a href="<c:url value="/admin/institutions"/>">Zarządzaj fundacjami</a></li>
-                    <li><a href="<c:url value="/admin/administrators"/>">Zarządzaj administratorami</a></li>
-<%--                    <li><a href="<c:url value="/admin/users"/>">Zarządzaj użytkownikami</a></li>--%>
+<%--                    <li><a href="<c:url value="/admin/manageAdmins"/>">Zarządzaj administratorami</a></li>--%>
+<%--                    <li><a href="<c:url value="/admin/manageUsers"/>">Zarządzaj użytkownikami</a></li>--%>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">
                             <input type="submit" value="Wyloguj">
@@ -40,20 +40,21 @@
         </ul>
         <section>
             <h2>Dodaj dane instytucji:</h2>
-            <form:form action="/admin/instAdd" method="post" modelAttribute="institution">
+            <form:form action="/admin/adminUpdate" method="post" modelAttribute="adminToUpdate">
                 <form:hidden path="id"/>
                 <div class="form-group form-group--inline">
                     <label>
-                        Wpisz nazwę fundacji: <form:input path="name"/>
+                        Wpisz nazwę administratora: <form:input path="username"/>
                     </label>
                 </div>
                 <div class="form-group form-group--inline">
                     <label>
-                        Wpisz opis fundacji: <form:textarea path="description"/>
+                        Wpisz status (0 - nieaktywny, 1 -aktywny): <form:input path="enabled"/>
                     </label>
                 </div>
                 <div class="form-group form-group--buttons">
                     <button type="submit" class="btn">Potwierdzam</button>
+                    <div class="btn"><a href="/admin/administrators">Wstecz</a></div>
                 </div>
             </form:form>
         </section>

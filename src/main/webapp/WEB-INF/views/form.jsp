@@ -133,15 +133,15 @@
             <!-- STEP 4 -->
             <div data-step="3">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
-                <c:forEach items="${institutions}" var="institution">
+                <c:forEach items="${institutions}" var="administrator">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input type="radio" name="institution" value="${institution.id}" id="institutionId"/>
+                            <input type="radio" name="institution" value="${administrator.id}" id="institutionId"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
-                  <div class="title" id="institutionName">${institution.name}</div>
+                  <div class="title" id="institutionName">${administrator.name}</div>
                   <div class="subtitle">
-                          ${institution.description}
+                          ${administrator.description}
                   </div>
                 </span>
                         </label>
