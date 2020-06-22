@@ -68,6 +68,36 @@
         </div>
     </div>
 </header>
+<section class="help">
+    <h2>Moje dary:</h2>
+
+    <!-- SLIDE 1 -->
+    <div class="help--slides active" data-id="1">
+<%--        <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.--%>
+<%--            Możesz sprawdzić czym się zajmują.</p>--%>
+
+        <ul class="help--slides-items">
+            <c:forEach items="${userDonations}" var="userDonation" varStatus="loop">
+                <c:if test="${loop.count % 2 != 0}">
+                    <li>
+                </c:if>
+                <div class="col">
+                    <div class="title">Data: ${userDonation.pickUpDate} ${userDonation.pickUpTime} Ilość: ${userDonation.quantity}</div>
+                    <div class="subtitle">${userDonation.street} ${userDonation.city} ${userDonation.zipCode}</div>
+                    <div class="subtitle">Dla ${userDonation.institution.name}</div>
+                    <div class="subtitle">Status:
+                        <c:if test="${userDonation.picked == false}">nieodebrane</c:if>
+                        <c:if test="${userDonation.picked == true}">odebrano</c:if>
+                    </div>
+                </div>
+                <c:if test="${loop.count % 2 == 0}">
+                    </li>
+                </c:if>
+            </c:forEach>
+        </ul>
+    </div>
+
+</section>
 <%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>

@@ -84,13 +84,13 @@
             Możesz sprawdzić czym się zajmują.</p>
 
         <ul class="help--slides-items">
-            <c:forEach items="${institutions}" var="user" varStatus="loop">
+            <c:forEach items="${institutions}" var="userDonation" varStatus="loop">
                 <c:if test="${loop.count % 2 != 0}">
                     <li>
                 </c:if>
                 <div class="col">
-                    <div class="title">${user.name}</div>
-                    <div class="subtitle">${user.description}</div>
+                    <div class="title">${userDonation.name}</div>
+                    <div class="subtitle">${userDonation.description}</div>
                 </div>
                 <c:if test="${loop.count % 2 == 0}">
                     </li>

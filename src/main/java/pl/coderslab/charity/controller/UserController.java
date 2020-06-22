@@ -9,6 +9,7 @@ import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.interfaces.CategoryService;
+import pl.coderslab.charity.interfaces.DonationService;
 import pl.coderslab.charity.interfaces.InstitutionService;
 import pl.coderslab.charity.interfaces.UserService;
 import pl.coderslab.charity.model.CurrentUser;
@@ -22,11 +23,13 @@ public class UserController {
     private UserService userService;
     private CategoryService categoryService;
     private InstitutionService institutionService;
+    private DonationService donationService;
 
-    public UserController(UserService userService, CategoryService categoryService, InstitutionService institutionService) {
+    public UserController(UserService userService, CategoryService categoryService, InstitutionService institutionService, DonationService donationService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.institutionService = institutionService;
+        this.donationService = donationService;
     }
 
     @GetMapping("/panel")
@@ -74,5 +77,16 @@ public class UserController {
     @ModelAttribute("institutions")
     public List<Institution> institutions(){
         return institutionService.findAll();
+    }
+
+    @GetMapping("/myDonations/{id}")
+    public String myDonations(@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model){
+        model.addAttribute("user", currentUser.getUser());
+        return "/user/userDonations";
+    }
+
+    @ModelAttribute("userDonations")
+    public List<Donation> userDonations(@AuthenticationPrincipal CurrentUser currentUser){
+        return donationService.getUserDonations(currentUser.getUser().getId());
     }
 }

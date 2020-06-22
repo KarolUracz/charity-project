@@ -186,10 +186,6 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById('pickUpCommentInsert').innerText = pickUpComment
       // document.getElementById('summary').innerText = categories;
 
-
-
-
-
     }
 
   }

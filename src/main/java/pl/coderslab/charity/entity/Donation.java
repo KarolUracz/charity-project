@@ -32,4 +32,5 @@ public class Donation {
     private String pickUpComment;
     @ManyToOne(cascade = CascadeType.DETACH)
     private User user;
+    private boolean picked;
 }

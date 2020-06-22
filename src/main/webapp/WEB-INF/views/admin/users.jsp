@@ -40,20 +40,20 @@
 
     <div class="slogan container container--90">
         <ul class="help--slides-items">
-            <c:forEach items="${users}" var="user">
+            <c:forEach items="${users}" var="userDonation">
             <li>
                 <div class="col">
-                    <div class="title">Użytkownik: ${user.username}</div>
-                    <div class="subtitle">Status: ${user.enabled}</div>
+                    <div class="title">Użytkownik: ${userDonation.username}</div>
+                    <div class="subtitle">Status: ${userDonation.enabled}</div>
                     <div>
-                        <a href="/admin/userUpdate/${user.id}">Edytuj</a>
-                        <c:if test="${user.enabled == 1}">
-                            <a href="/admin/deactivateUser/${user.id}">Zablokuj</a>
+                        <a href="/admin/userUpdate/${userDonation.id}">Edytuj</a>
+                        <c:if test="${userDonation.enabled == 1}">
+                            <a href="/admin/deactivateUser/${userDonation.id}">Zablokuj</a>
                         </c:if>
-                        <c:if test="${user.enabled == 0}">
-                            <a href="/admin/activateUser/${user.id}">Aktywuj</a>
+                        <c:if test="${userDonation.enabled == 0}">
+                            <a href="/admin/activateUser/${userDonation.id}">Aktywuj</a>
                         </c:if>
-                        <a href="/admin/deleteUser/${user.id}">Usuń</a>
+                        <a href="/admin/deleteUser/${userDonation.id}">Usuń</a>
                     </div>
                 </div>
             </li>
