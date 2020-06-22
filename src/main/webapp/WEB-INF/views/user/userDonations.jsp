@@ -8,6 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Panel Użytkownika</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
+<%--    <script src="/resources/js/sorttable.js"></script>--%>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 </head>
 <body>
 <header class="header--form-page">
@@ -73,31 +77,49 @@
 
     <!-- SLIDE 1 -->
     <div class="help--slides active" data-id="1">
-<%--        <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.--%>
-<%--            Możesz sprawdzić czym się zajmują.</p>--%>
-
-        <ul class="help--slides-items">
-            <c:forEach items="${userDonations}" var="userDonation" varStatus="loop">
-                <c:if test="${loop.count % 2 != 0}">
-                    <li>
-                </c:if>
-                <div class="col">
-                    <div class="title">Data: ${userDonation.pickUpDate} ${userDonation.pickUpTime} Ilość: ${userDonation.quantity}</div>
-                    <div class="subtitle">${userDonation.street} ${userDonation.city} ${userDonation.zipCode}</div>
-                    <div class="subtitle">Dla ${userDonation.institution.name}</div>
-                    <div class="subtitle">Status:
+        <%--        <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.--%>
+        <%--            Możesz sprawdzić czym się zajmują.</p>--%>
+        <table class="sortable">
+            <thead>
+            <tr>
+                <th>Kategoria daru</th>
+                <th>Ilość worków</th>
+                <th>Instytucja</th>
+                <th>Data odbioru</th>
+                <th>Godzina odbioru</th>
+                <th>Komentarz</th>
+                <th>Adres</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${userDonations}" var="userDonation">
+                <tr>
+                    <td>
+                        <c:forEach items="${userDonation.categories}" var="category">
+                            ${category.name}
+                        </c:forEach>
+                    </td>
+                    <td>${userDonation.quantity}</td>
+                    <td>${userDonation.institution.name}</td>
+                    <td>${userDonation.pickUpDate}</td>
+                    <td>${userDonation.pickUpTime}</td>
+                    <td>${userDonation.pickUpComment}</td>
+                    <td>${userDonation.street} ${userDonation.city} ${userDonation.zipCode}</td>
+                    <td>
                         <c:if test="${userDonation.picked == false}">nieodebrane</c:if>
                         <c:if test="${userDonation.picked == true}">odebrano</c:if>
-                    </div>
-                </div>
-                <c:if test="${loop.count % 2 == 0}">
-                    </li>
-                </c:if>
+                    </td>
+                </tr>
             </c:forEach>
-        </ul>
+
+            </tbody>
+        </table>
     </div>
 
 </section>
 <%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
+<script src="/resources/js/app.js"></script>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 </html>
