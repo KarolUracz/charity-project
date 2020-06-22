@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
+import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.interfaces.CategoryService;
 import pl.coderslab.charity.interfaces.DonationService;
 import pl.coderslab.charity.interfaces.InstitutionService;
@@ -52,8 +53,8 @@ public class DonationController {
     }
 
     @PostMapping("/form")
-    public String formAction(@ModelAttribute Donation donation, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("user", currentUser.getUser());
+    public String formAction(@ModelAttribute Donation donation, @AuthenticationPrincipal CurrentUser currentUser) {
+        donation.setUser(currentUser.getUser());
         donationService.save(donation);
         return "/form-confirmation";
     }

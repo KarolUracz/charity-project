@@ -62,13 +62,12 @@
                     </li>
                 </ul>
                 <br>
-                <br>
-                <br>
+                <div></div>
                 <div class="btn"><a href="/user/donation">Formularz</a></div>
             </div>
         </div>
     </div>
 </header>
-<%@ include file="/WEB-INF/views/footer.jsp"%>
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
