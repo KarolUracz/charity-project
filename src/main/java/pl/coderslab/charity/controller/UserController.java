@@ -8,10 +8,7 @@ import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.User;
-import pl.coderslab.charity.service.CategoryService;
-import pl.coderslab.charity.service.DonationService;
-import pl.coderslab.charity.service.InstitutionService;
-import pl.coderslab.charity.service.UserService;
+import pl.coderslab.charity.service.*;
 import pl.coderslab.charity.model.CurrentUser;
 
 import java.util.List;
@@ -24,12 +21,14 @@ public class UserController {
     private CategoryService categoryService;
     private InstitutionService institutionService;
     private DonationService donationService;
+    private EmailService emailService;
 
-    public UserController(UserService userService, CategoryService categoryService, InstitutionService institutionService, DonationService donationService) {
+    public UserController(UserService userService, CategoryService categoryService, InstitutionService institutionService, DonationService donationService, EmailService emailService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.institutionService = institutionService;
         this.donationService = donationService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/panel")
@@ -97,4 +96,5 @@ public class UserController {
         donationService.save(donationById);
         return "redirect:/user/myDonations/";
     }
+
 }
