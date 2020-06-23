@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.fixture.InitDataFixture;
+import pl.coderslab.charity.service.EmailService;
 import pl.coderslab.charity.service.UserService;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
@@ -20,13 +21,15 @@ public class HomeController {
     private DonationRepository donationRepository;
     private InitDataFixture initDataFixture;
     private UserService userService;
+    private EmailService emailService;
 
 
-    public HomeController(InstitutionRepository institutionRepository, DonationRepository donationRepository, InitDataFixture initDataFixture, UserService userService) {
+    public HomeController(InstitutionRepository institutionRepository, DonationRepository donationRepository, InitDataFixture initDataFixture, UserService userService, EmailService emailService) {
         this.institutionRepository = institutionRepository;
         this.donationRepository = donationRepository;
         this.initDataFixture = initDataFixture;
         this.userService = userService;
+        this.emailService = emailService;
     }
 
 
@@ -66,5 +69,13 @@ public class HomeController {
     public String userRegister(@ModelAttribute User user) {
         userService.saveUser(user);
         return "index";
+    }
+
+
+    @GetMapping("/mail")
+    @ResponseBody
+    public String sendMail(){
+        emailService.simpleMessage("karol_ur@interia.pl", "test", "test");
+        return "email sent";
     }
 }
