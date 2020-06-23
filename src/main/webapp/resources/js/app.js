@@ -91,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+
   /**
    * Switching between form steps
    */
@@ -163,6 +164,10 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 5;
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
+      $(document).ready( function () {
+        $('#table_id').DataTable();
+      } );
+
       // TODO: get data from inputs and show them in summary
       let quantity = document.getElementById('quantity').value;
       let institutionName = document.getElementById('institutionName').value;
@@ -186,15 +191,13 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById('pickUpCommentInsert').innerText = pickUpComment
       // document.getElementById('summary').innerText = categories;
 
-
-
-
-
     }
-
   }
   const form = document.querySelector(".form--steps");
   if (form !== null) {
     new FormSteps(form);
   }
 });
+$(document).ready( function () {
+  $('#table').DataTable();
+} );
