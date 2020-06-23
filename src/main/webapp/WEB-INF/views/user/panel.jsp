@@ -17,7 +17,7 @@
                 ${user.username}
                 <ul class="dropdown">
                     <li><a href="/user/editProfile/${user.id}">Profil</a></li>
-                    <li><a href="/user/myDonations/${user.id}">Moje zbiórki</a></li>
+                    <li><a href="/user/myDonations/">Moje zbiórki</a></li>
                     <li><a href="/user/passwordChange/${user.id}">Zmień hasło</a></li>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">

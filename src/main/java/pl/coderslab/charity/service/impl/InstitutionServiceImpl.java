@@ -1,8 +1,8 @@
-package pl.coderslab.charity.service;
+package pl.coderslab.charity.service.impl;
 
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.entity.Institution;
-import pl.coderslab.charity.interfaces.InstitutionService;
+import pl.coderslab.charity.service.InstitutionService;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
 import java.util.List;

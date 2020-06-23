@@ -8,10 +8,10 @@ import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.User;
-import pl.coderslab.charity.interfaces.CategoryService;
-import pl.coderslab.charity.interfaces.DonationService;
-import pl.coderslab.charity.interfaces.InstitutionService;
-import pl.coderslab.charity.interfaces.UserService;
+import pl.coderslab.charity.service.CategoryService;
+import pl.coderslab.charity.service.DonationService;
+import pl.coderslab.charity.service.InstitutionService;
+import pl.coderslab.charity.service.UserService;
 import pl.coderslab.charity.model.CurrentUser;
 
 import java.util.List;
@@ -79,8 +79,8 @@ public class UserController {
         return institutionService.findAll();
     }
 
-    @GetMapping("/myDonations/{id}")
-    public String myDonations(@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model){
+    @GetMapping("/myDonations/")
+    public String myDonations(@AuthenticationPrincipal CurrentUser currentUser, Model model){
         model.addAttribute("user", currentUser.getUser());
         return "/user/userDonations";
     }
@@ -88,5 +88,13 @@ public class UserController {
     @ModelAttribute("userDonations")
     public List<Donation> userDonations(@AuthenticationPrincipal CurrentUser currentUser){
         return donationService.getUserDonations(currentUser.getUser().getId());
+    }
+
+    @GetMapping("/confirmPick/{id}")
+    public String confirmPick(@PathVariable Long id){
+        Donation donationById = donationService.findById(id);
+        donationById.setPicked(true);
+        donationService.save(donationById);
+        return "redirect:/user/myDonations/";
     }
 }

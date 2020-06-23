@@ -1,4 +1,4 @@
-package pl.coderslab.charity.interfaces;
+package pl.coderslab.charity.service;
 
 import pl.coderslab.charity.entity.Category;
 

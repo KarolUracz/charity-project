@@ -1,9 +1,8 @@
-package pl.coderslab.charity.service;
+package pl.coderslab.charity.service.impl;
 
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.entity.Donation;
-import pl.coderslab.charity.entity.User;
-import pl.coderslab.charity.interfaces.DonationService;
+import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.repository.DonationRepository;
 
 import java.util.List;
@@ -36,5 +35,10 @@ public class DonationServiceImpl implements DonationService {
     @Override
     public List<Donation> getUserDonations(Long userId) {
         return donationRepository.getUserDonations(userId);
+    }
+
+    @Override
+    public Donation findById(Long id) {
+        return donationRepository.getOne(id);
     }
 }

@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
-import pl.coderslab.charity.interfaces.CategoryService;
-import pl.coderslab.charity.interfaces.DonationService;
-import pl.coderslab.charity.interfaces.InstitutionService;
+import pl.coderslab.charity.service.CategoryService;
+import pl.coderslab.charity.service.DonationService;
+import pl.coderslab.charity.service.InstitutionService;
 import pl.coderslab.charity.model.CurrentUser;
 
 import java.util.List;

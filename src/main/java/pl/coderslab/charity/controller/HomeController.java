@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.fixture.InitDataFixture;
-import pl.coderslab.charity.interfaces.UserService;
+import pl.coderslab.charity.service.UserService;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.model.CurrentUser;

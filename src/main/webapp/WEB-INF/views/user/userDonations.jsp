@@ -21,7 +21,7 @@
                 ${user.username}
                 <ul class="dropdown">
                     <li><a href="/user/editProfile/${user.id}">Profil</a></li>
-                    <li><a href="/user/myDonations/${user.id}">Moje zbiórki</a></li>
+                    <li><a href="/user/myDonations/">Moje zbiórki</a></li>
                     <li><a href="/user/passwordChange/${user.id}">Zmień hasło</a></li>
                     <li>
                         <form action="<c:url value="/logout"/>" method="post">
@@ -107,7 +107,7 @@
                     <td>${userDonation.pickUpComment}</td>
                     <td>${userDonation.street} ${userDonation.city} ${userDonation.zipCode}</td>
                     <td>
-                        <c:if test="${userDonation.picked == false}">nieodebrane</c:if>
+                        <c:if test="${userDonation.picked == false}">nieodebrane <a href="/user/confirmPick/${userDonation.id}"><button type="button" class="btn">Potwierdź odbiór</button></a> </c:if>
                         <c:if test="${userDonation.picked == true}">odebrano</c:if>
                     </td>
                 </tr>
