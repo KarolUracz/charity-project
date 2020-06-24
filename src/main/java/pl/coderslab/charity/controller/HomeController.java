@@ -1,18 +1,20 @@
 package pl.coderslab.charity.controller;
 
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.entity.User;
+import pl.coderslab.charity.entity.VerificationToken;
 import pl.coderslab.charity.fixture.InitDataFixture;
 import pl.coderslab.charity.service.EmailService;
 import pl.coderslab.charity.service.UserService;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.model.CurrentUser;
-
+import pl.coderslab.charity.service.VerificationTokenService;
 
 @Controller
 public class HomeController {
@@ -22,14 +24,20 @@ public class HomeController {
     private InitDataFixture initDataFixture;
     private UserService userService;
     private EmailService emailService;
+    private VerificationTokenService verificationTokenService;
 
 
-    public HomeController(InstitutionRepository institutionRepository, DonationRepository donationRepository, InitDataFixture initDataFixture, UserService userService, EmailService emailService) {
+
+    public HomeController(InstitutionRepository institutionRepository, DonationRepository donationRepository,
+                          InitDataFixture initDataFixture, UserService userService, EmailService emailService,
+                          VerificationTokenService verificationTokenService) {
         this.institutionRepository = institutionRepository;
         this.donationRepository = donationRepository;
         this.initDataFixture = initDataFixture;
         this.userService = userService;
         this.emailService = emailService;
+        this.verificationTokenService = verificationTokenService;
+        ;
     }
 
 
@@ -67,15 +75,36 @@ public class HomeController {
 
     @PostMapping("/register")
     public String userRegister(@ModelAttribute User user) {
-        userService.saveUser(user);
-        return "index";
+        User existingUser = userService.findByUserName(user.getUsername());
+        if (existingUser != null){
+            return "/registerError";
+        } else {
+            userService.saveUser(user);
+            VerificationToken verificationToken = new VerificationToken(user);
+            verificationTokenService.saveToken(verificationToken);
+            emailService.sendConfirmationMail(user.getUsername(), verificationToken.getToken());
+            return "/registerSuccess";
+        }
     }
 
-
-    @GetMapping("/mail")
-    @ResponseBody
-    public String sendMail(){
-        emailService.simpleMessage("karol_ur@interia.pl", "test", "test");
-        return "email sent";
+    @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
+    public String confirmUserAccount(@RequestParam("token") String verificationToken) {
+        VerificationToken token = verificationTokenService.findByToken(verificationToken);
+        if (token != null) {
+            User user = userService.findByUserName(token.getUser().getUsername());
+            user.setEnabled(1);
+            userService.save(user);
+            return "/accountVerified";
+        } else {
+            return "/confirmationError";
+        }
     }
+
+//
+//    @GetMapping("/mail")
+//    @ResponseBody
+//    public String sendMail(){
+//        emailService.simpleMessage("karol_ur@interia.pl", "test", "test");
+//        return "email sent";
+//    }
 }
