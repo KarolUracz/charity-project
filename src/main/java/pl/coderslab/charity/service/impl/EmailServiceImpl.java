@@ -20,4 +20,15 @@ public class EmailServiceImpl implements EmailService {
         message.setText(text);
         emailSender.send(message);
     }
+
+    @Override
+    public void sendConfirmationMail(String to, String token) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject("Dokończ rejestrację.");
+        message.setFrom("charity project");
+        message.setText("Aby dokończyć rejestrację, kliknij w link: "
+                + "http://localhost:8080/confirm-account?token="+token);
+        emailSender.send(message);
+    }
 }
