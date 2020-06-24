@@ -30,6 +30,6 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 
     @Override
     public boolean verifyTokenExpiryDate(VerificationToken token) {
-        return token.getExpiryDate().isBefore(LocalDateTime.now());
+        return token.getExpiryDate().isBefore(LocalDateTime.now().plusDays(1));
     }
 }
