@@ -1,6 +1,5 @@
 package pl.coderslab.charity.controller;
 
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,6 @@ public class HomeController {
     private VerificationTokenService verificationTokenService;
 
 
-
     public HomeController(InstitutionRepository institutionRepository, DonationRepository donationRepository,
                           InitDataFixture initDataFixture, UserService userService, EmailService emailService,
                           VerificationTokenService verificationTokenService) {
@@ -42,7 +40,7 @@ public class HomeController {
 
 
     @RequestMapping("/")
-    public String homeAction(Model model){
+    public String homeAction(Model model) {
         model.addAttribute("institutions", institutionRepository.findAll());
         model.addAttribute("bags", donationRepository.bagsSum().orElse(0));
         model.addAttribute("donations", donationRepository.findAll().size());
@@ -53,7 +51,7 @@ public class HomeController {
     public String loginAction(@AuthenticationPrincipal CurrentUser currentUser) {
         if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             return "redirect:/admin/panel";
-        } else if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))){
+        } else if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
             return "redirect:/user/panel";
         }
         return null;
@@ -68,7 +66,7 @@ public class HomeController {
     }
 
     @GetMapping("/register")
-    public String registration(Model model){
+    public String registration(Model model) {
         model.addAttribute("user", new User());
         return "register";
     }
@@ -76,7 +74,7 @@ public class HomeController {
     @PostMapping("/register")
     public String userRegister(@ModelAttribute User user) {
         User existingUser = userService.findByUserName(user.getUsername());
-        if (existingUser != null){
+        if (existingUser != null) {
             return "/registerError";
         } else {
             userService.saveUser(user);
@@ -90,7 +88,7 @@ public class HomeController {
     @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
     public String confirmUserAccount(@RequestParam("token") String verificationToken) {
         VerificationToken token = verificationTokenService.findByToken(verificationToken);
-        if (token != null) {
+        if (token != null && verificationTokenService.verifyTokenExpiryDate(token)) {
             User user = userService.findByUserName(token.getUser().getUsername());
             user.setEnabled(1);
             userService.save(user);
