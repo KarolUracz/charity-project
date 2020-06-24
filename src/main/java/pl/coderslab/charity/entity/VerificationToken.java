@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 public class VerificationToken {
     private static final int EXPIRATION = 60*24;
     @Id
@@ -31,6 +30,8 @@ public class VerificationToken {
         calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(calendar.getTime().getTime());
     }
+
+    public VerificationToken(){}
 
     public VerificationToken(User user) {
         this.user = user;

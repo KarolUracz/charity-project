@@ -79,7 +79,7 @@ public class HomeController {
         if (existingUser != null){
             return "/registerError";
         } else {
-            userService.save(user);
+            userService.saveUser(user);
             VerificationToken verificationToken = new VerificationToken(user);
             verificationTokenService.saveToken(verificationToken);
             emailService.sendConfirmationMail(user.getUsername(), verificationToken.getToken());
@@ -87,24 +87,24 @@ public class HomeController {
         }
     }
 
-    @RequestMapping(value = "/confimr-account", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
     public String confirmUserAccount(@RequestParam("token") String verificationToken) {
         VerificationToken token = verificationTokenService.findByToken(verificationToken);
         if (token != null) {
             User user = userService.findByUserName(token.getUser().getUsername());
             user.setEnabled(1);
-            userService.saveUser(user);
+            userService.save(user);
             return "/accountVerified";
         } else {
             return "/confirmationError";
         }
     }
 
-
-    @GetMapping("/mail")
-    @ResponseBody
-    public String sendMail(){
-        emailService.simpleMessage("karol_ur@interia.pl", "test", "test");
-        return "email sent";
-    }
+//
+//    @GetMapping("/mail")
+//    @ResponseBody
+//    public String sendMail(){
+//        emailService.simpleMessage("karol_ur@interia.pl", "test", "test");
+//        return "email sent";
+//    }
 }

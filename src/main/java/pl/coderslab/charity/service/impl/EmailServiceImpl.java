@@ -26,9 +26,9 @@ public class EmailServiceImpl implements EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("Dokończ rejestrację.");
-        message.setFrom("charity project");
+        message.setFrom("charityProject");
         message.setText("Aby dokończyć rejestrację, kliknij w link: "
-                + "http://localhost:8080/confirm-account?token="+token);
+                +"http://localhost:8080/confirm-account?token="+token);
         emailSender.send(message);
     }
 }

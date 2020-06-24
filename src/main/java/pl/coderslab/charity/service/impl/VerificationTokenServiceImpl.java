@@ -21,6 +21,6 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 
     @Override
     public VerificationToken findByToken(String token) {
-        return repository.findByVerificationToken(token);
+        return repository.findByToken(token);
     }
 }
