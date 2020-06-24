@@ -98,6 +98,21 @@ public class HomeController {
         }
     }
 
+    @GetMapping("/resetPassword")
+    public String resetPassword(){
+        return "/resetPassword";
+    }
+
+    @PostMapping("/resetPassword")
+    public String resetPassword(@RequestParam String resetMail){
+        User byUserName = userService.findByUserName(resetMail);
+        if (byUserName != null) {
+            return "/resetPasswordForm";
+        } else {
+            return "/mailNotPresent";
+        }
+    }
+
 //
 //    @GetMapping("/mail")
 //    @ResponseBody
