@@ -93,4 +93,11 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
+
+    @Override
+    public void resetPassword(String username, String password) {
+        User fromDb = userRepository.findByUsername(username);
+        fromDb.setPassword(passwordEncoder.encode(password));
+        userRepository.save(fromDb);
+    }
 }

@@ -30,7 +30,7 @@ public class VerificationToken {
 
     private LocalDateTime calculateExpiryDate(int expiryTimeInMinutes) {
         LocalDateTime time = LocalDateTime.now();
-        time.plus(EXPIRATION, ChronoUnit.HOURS);
+        time.plus(expiryTimeInMinutes, ChronoUnit.HOURS);
         return time;
     }
 

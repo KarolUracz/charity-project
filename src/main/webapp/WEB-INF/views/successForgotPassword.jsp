@@ -14,16 +14,11 @@
     <%@include file="header.jsp"%>
 
     <section class="login-page">
-      <form method="post">
-        <div class="form-group form-group--inline">
-        <label> Podaj maila na, którego mamy wysłać link do resetu hasła: <input type="text" id="resetMail" name="resetMail"/></label>
-        </div>
-        <div class="form-group form-group--buttons">
-          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-          <button type="submit" class="btn">Potwierdzam</button>
-        </div>
-
-      </form>
+      <section class="login-page">
+        <h2>Żądanie resetu hasła otrzymano. Sprawdź swoją skrzynkę mailową.</h2>
+        <a href="/">
+          <button type="button" class="btn">Do strony głównej</button>
+        </a>
       </section>
     </section>
 

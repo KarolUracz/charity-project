@@ -99,25 +99,44 @@ public class HomeController {
     }
 
     @GetMapping("/resetPassword")
-    public String resetPassword(){
+    public String resetPassword() {
         return "/resetPassword";
     }
 
     @PostMapping("/resetPassword")
-    public String resetPassword(@RequestParam String resetMail){
+    public String resetPassword(@RequestParam String resetMail) {
         User byUserName = userService.findByUserName(resetMail);
         if (byUserName != null) {
-            return "/resetPasswordForm";
+            VerificationToken token = new VerificationToken(byUserName);
+            verificationTokenService.saveToken(token);
+            emailService.sendResetPasswordMail(resetMail, token.getToken());
+            return "/successForgotPassword";
         } else {
             return "/mailNotPresent";
         }
     }
 
-//
-//    @GetMapping("/mail")
-//    @ResponseBody
-//    public String sendMail(){
-//        emailService.simpleMessage("karol_ur@interia.pl", "test", "test");
-//        return "email sent";
-//    }
+    @RequestMapping(value = "/confirm-reset", method = {RequestMethod.GET, RequestMethod.POST})
+    public String validateResetToken(@RequestParam String token, Model model) {
+        VerificationToken byToken = verificationTokenService.findByToken(token);
+        if (byToken != null && verificationTokenService.verifyTokenExpiryDate(byToken)) {
+            User fromToken = userService.findByUserName(byToken.getUser().getUsername());
+            fromToken.setEnabled(1);
+            userService.saveUser(fromToken);
+            model.addAttribute("user", fromToken);
+            return "/resetPasswordForm";
+        } else {
+            return "/registerError";
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public String passReset(@ModelAttribute User user, @RequestParam String password2) {
+        if (user != null && user.getPassword().equals(password2)) {
+                userService.resetPassword(user.getUsername(), password2);
+                return "redirect:/login";
+            } else {
+                return "/resetPasswordForm";
+            }
+    }
 }

@@ -31,4 +31,15 @@ public class EmailServiceImpl implements EmailService {
                 +"http://localhost:8080/confirm-account?token="+token);
         emailSender.send(message);
     }
+
+    @Override
+    public void sendResetPasswordMail(String to, String token) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject("Zresetuj hasło.");
+        message.setFrom("charityProject");
+        message.setText("Aby zresetować hasło, kliknij w link: "
+                +"http://localhost:8080/confirm-reset?token="+token);
+        emailSender.send(message);
+    }
 }
