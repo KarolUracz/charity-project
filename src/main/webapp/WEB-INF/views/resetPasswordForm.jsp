@@ -16,13 +16,18 @@
 
 <section class="login-page">
     <h2>Zresetuj hasło</h2>
-    <form:form method="post" action="/reset-password" modelAttribute="user">
-        <input type="hidden"  path="username" type="hidden" value="${user.username}"/>
+    <form:form method="post" action="/reset-password" modelAttribute="userForm">
         <div class="form-group">
-            <form:input type="password" name="password" placeholder="Hasło" path="password"/>
+            <form:input path="username" value="${userForm.username}" placeholder="${userForm.username}"/>
+            <form:errors path="username"/>
         </div>
         <div class="form-group">
-            <input type="password" name="password2" placeholder="Powtórz hasło"/>
+            <form:input type="password" name="password" placeholder="Hasło" path="password"/>
+            <form:errors path="password"/>
+        </div>
+        <div class="form-group">
+            <form:input type="password" name="password2" placeholder="Powtórz hasło" path="passwordConfirm"/>
+            <form:errors path="passwordConfirm"/>
         </div>
         <div class="form-group">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

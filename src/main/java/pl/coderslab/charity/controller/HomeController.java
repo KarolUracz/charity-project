@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.entity.VerificationToken;
 import pl.coderslab.charity.fixture.InitDataFixture;
+import pl.coderslab.charity.model.UserForm;
 import pl.coderslab.charity.service.EmailService;
 import pl.coderslab.charity.service.UserService;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.model.CurrentUser;
 import pl.coderslab.charity.service.VerificationTokenService;
+
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -121,9 +124,9 @@ public class HomeController {
         VerificationToken byToken = verificationTokenService.findByToken(token);
         if (byToken != null && verificationTokenService.verifyTokenExpiryDate(byToken)) {
             User fromToken = userService.findByUserName(byToken.getUser().getUsername());
-            fromToken.setEnabled(1);
-            userService.saveUser(fromToken);
-            model.addAttribute("user", fromToken);
+            UserForm userForm = new UserForm();
+            userForm.setUsername(fromToken.getUsername());
+            model.addAttribute("userForm", userForm);
             return "/resetPasswordForm";
         } else {
             return "/registerError";
@@ -131,9 +134,9 @@ public class HomeController {
     }
 
     @PostMapping("/reset-password")
-    public String passReset(@ModelAttribute User user, @RequestParam String password2) {
-        if (user != null && user.getPassword().equals(password2)) {
-                userService.resetPassword(user.getUsername(), password2);
+    public String passReset(@Valid @ModelAttribute UserForm userForm) {
+        if (userForm != null && userForm.getPassword().equals(userForm.getPasswordConfirm())) {
+                userService.resetPassword(userForm.getUsername(), userForm.getPasswordConfirm());
                 return "redirect:/login";
             } else {
                 return "/resetPasswordForm";

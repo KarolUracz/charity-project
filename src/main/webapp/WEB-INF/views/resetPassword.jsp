@@ -3,30 +3,33 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Login</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  </head>
-  <body>
-    <%@include file="header.jsp"%>
+</head>
+<body>
+<%@include file="header.jsp" %>
 
-    <section class="login-page">
-      <form method="post">
+<section class="login-page">
+    <form method="post">
+        <div class="form-group">
+            Podaj maila na, którego mamy wysłać link do resetu hasła:
+        </div>
         <div class="form-group form-group--inline">
-        <label> Podaj maila na, którego mamy wysłać link do resetu hasła: <input type="text" id="resetMail" name="resetMail"/></label>
+            <input type="text" id="resetMail" name="resetMail"/>
         </div>
         <div class="form-group form-group--buttons">
-          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-          <button type="submit" class="btn">Potwierdzam</button>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button type="submit" class="btn">Potwierdzam</button>
         </div>
 
-      </form>
-      </section>
-    </section>
+    </form>
+</section>
+</section>
 
-  <%@include file="footer.jsp"%>
-  </body>
+<%@include file="footer.jsp" %>
+</body>
 </html>

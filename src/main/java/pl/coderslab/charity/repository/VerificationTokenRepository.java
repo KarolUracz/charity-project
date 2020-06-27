@@ -6,5 +6,5 @@ import pl.coderslab.charity.entity.VerificationToken;
 
 @Repository
 public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
-    VerificationToken findByToken(String token);
+    VerificationToken findByTokenIsLike(String token);
 }
