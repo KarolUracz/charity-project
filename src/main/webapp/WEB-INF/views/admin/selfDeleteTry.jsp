@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,13 +21,10 @@
                     <li><a href="/admin/administrators">Zarządzaj administratorami</a></li>
                     <li><a href="/admin/users">Zarządzaj użytkownikami</a></li>
                     <li>
-                        <nav>
-                            <form action="<c:url value="/logout"/>" method="post">
-                                <input type="submit" value="Wyloguj">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            </form>
-                        </nav
-                        >
+                        <form action="<c:url value="/logout"/>" method="post">
+                            <input type="submit" value="Wyloguj">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -40,20 +38,14 @@
             <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
-
-    <div class="slogan container container--90">
-        <h2>
-            <div class="col">
-                <div class="title"><a href="/admin/institutions">Zarządzaj fundacjami</a></div>
-            </div>
-            <div class="col">
-                <div class="title"><a href="/admin/administrators">Zarządzaj administratorami</a></div>
-            </div>
-            <div class="col">
-                <div class="title"><a href="/admin/users">Zarządzaj użytkownikami</a></div>
-            </div>
-        </h2>
-    </div>
 </header>
+<div class="slogan container container--90">
+    <h2>Nie możesz usunąć samego siebie</h2>
+</div>
+<div class="btn">
+    <a href="/admin/administrators">Wstecz</a>
+</div>
+<%@ include file="/WEB-INF/views/footer.jsp"%>
+<script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
