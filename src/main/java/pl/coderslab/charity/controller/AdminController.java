@@ -109,9 +109,14 @@ public class AdminController {
     }
 
     @GetMapping("/adminDelete/{id}")
-    public String deleteAdmin(@PathVariable Long id){
-        userService.deleteUser(id);
-        return "redirect:/admin/administrators";
+    public String deleteAdmin(@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser, Model model){
+        if (currentUser.getUser().getId().equals(id)){
+            model.addAttribute("admin", currentUser.getUser());
+            return "/admin/selfDeleteTry";
+        } else {
+            userService.deleteUser(id);
+            return "redirect:/admin/administrators";
+        }
     }
 
     @GetMapping("/users")
