@@ -4,6 +4,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.entity.VerificationToken;
@@ -70,20 +71,26 @@ public class HomeController {
 
     @GetMapping("/register")
     public String registration(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("userForm", new UserForm());
         return "register";
     }
 
     @PostMapping("/register")
-    public String userRegister(@ModelAttribute User user) {
-        User existingUser = userService.findByUserName(user.getUsername());
+    public String userRegister(@Valid @ModelAttribute UserForm userForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "/register";
+        }
+        User existingUser = userService.findByUserName(userForm.getUsername());
         if (existingUser != null) {
             return "/registerError";
         } else {
-            userService.saveUser(user);
-            VerificationToken verificationToken = new VerificationToken(user);
+            User userToSave = new User();
+            userToSave.setUsername(userForm.getUsername());
+            userToSave.setPassword(userForm.getPasswordConfirm());
+            userService.saveUser(userToSave);
+            VerificationToken verificationToken = new VerificationToken(userToSave);
             verificationTokenService.saveToken(verificationToken);
-            emailService.sendConfirmationMail(user.getUsername(), verificationToken.getToken());
+            emailService.sendConfirmationMail(userToSave.getUsername(), verificationToken.getToken());
             return "/registerSuccess";
         }
     }
@@ -134,7 +141,10 @@ public class HomeController {
     }
 
     @PostMapping("/reset-password")
-    public String passReset(@Valid @ModelAttribute UserForm userForm) {
+    public String passReset(@Valid @ModelAttribute UserForm userForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/resetPasswordForm";
+        }
         if (userForm != null && userForm.getPassword().equals(userForm.getPasswordConfirm())) {
                 userService.resetPassword(userForm.getUsername(), userForm.getPasswordConfirm());
                 return "redirect:/login";

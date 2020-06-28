@@ -8,11 +8,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Constraint(validatedBy = PasswordMatchValidator.class)
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordMatch {
-    String first();
-    String second();
+    String password();
     String message() default "Pola muszą się zgadzać";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

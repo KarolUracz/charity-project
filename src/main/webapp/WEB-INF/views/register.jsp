@@ -15,15 +15,18 @@
 
     <section class="login-page">
       <h2>Załóż konto</h2>
-      <form:form method="post" modelAttribute="user">
+      <form:form method="post" modelAttribute="userForm">
         <div class="form-group">
           <form:input type="email" name="email" placeholder="Email"  path="username"/>
+          <form:errors path="username"/>
         </div>
         <div class="form-group">
           <form:input type="password" name="password" placeholder="Hasło"  path="password"/>
+          <form:errors path="password"/>
         </div>
         <div class="form-group">
-          <input type="password" name="password2" placeholder="Powtórz hasło" />
+          <form:input type="password" name="password2" placeholder="Powtórz hasło"  path="passwordConfirm"/>
+          <form:errors path="passwordConfirm"/>
         </div>
 
         <div class="form-group form-group--buttons">
