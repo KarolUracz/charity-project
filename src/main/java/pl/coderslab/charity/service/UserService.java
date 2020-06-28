@@ -15,4 +15,5 @@ public interface UserService {
     void save(User user);
     void editUser(User user);
     void changePassword(User user);
+    void resetPassword(String username, String password);
 }

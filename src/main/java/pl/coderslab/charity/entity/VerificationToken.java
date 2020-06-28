@@ -6,6 +6,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.TemporalUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -22,13 +26,12 @@ public class VerificationToken {
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
-    private Date expiryDate;
+    private LocalDateTime expiryDate;
 
-    private Date calculateExpiryDate(int expiryTimeInMinutes) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Timestamp(calendar.getTime().getTime()));
-        calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
-        return new Date(calendar.getTime().getTime());
+    private LocalDateTime calculateExpiryDate(int expiryTimeInMinutes) {
+        LocalDateTime time = LocalDateTime.now();
+        time.plus(expiryTimeInMinutes, ChronoUnit.HOURS);
+        return time;
     }
 
     public VerificationToken(){}
