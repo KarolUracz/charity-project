@@ -1,5 +1,7 @@
 package pl.coderslab.charity.validator;
 
+import pl.coderslab.charity.model.UserForm;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
@@ -11,8 +13,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordMatch {
-    String password();
-    String message() default "Pola muszą się zgadzać";
+    String message() default "Pola hasła i potwierdzenia muszą się zgadzać";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
+
 }
